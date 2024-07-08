@@ -1,4 +1,4 @@
-package encrypt
+package decrypt
 
 import (
 	"errors"
@@ -18,7 +18,7 @@ func parseCfg(cfg *Config) error {
 	}
 
 	if cfg.OutputFile == "" {
-		res := fmt.Sprintf("%s_enc", cfg.InputFile)
+		res := fmt.Sprintf("%s_decr", cfg.InputFile)
 		cfg.OutputFile = res
 	}
 	switch cfg.KeyMode {
