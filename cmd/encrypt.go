@@ -11,13 +11,11 @@ var config *encrypt.Config
 // encryptCmd represents the encrypt command
 var encryptCmd = &cobra.Command{
 	Use:   "encrypt",
-	Short: "A brief description of your command",
-	Long: `A longer description that spans multiple lines and likely contains examples
-and usage of using your command. For example:
-
-Cobra is a CLI library for Go that empowers applications.
-This application is a tool to generate the needed files
-to quickly create a Cobra application.`,
+	Short: "Encrypt file",
+	Long: `You can encrypt file with some algorithms:
+	To choice algo use flag -a or --algo.
+	To set pass use flag -k or --key,
+	To choice a file to encrypt use flag -f or --file`,
 	Run: func(cmd *cobra.Command, args []string) {
 		encrypt.Run(config)
 	},
@@ -31,6 +29,9 @@ func init() {
 	rootCmd.AddCommand(encryptCmd)
 
 	// Add flags to the encrypt command
+	encryptCmd.Flags().StringVarP(&config.Method, "algo", "a", "AES", "CHhooce algorithm to encrypt File")
+	encryptCmd.Flags().StringVarP(&config.MethodMode, "Mode", "M", "CFB", "Mode for Algorithm")
 	encryptCmd.Flags().StringVarP(&config.Key, "key", "k", "", "Key for cipher")
+	encryptCmd.Flags().StringVarP(&config.OutputFile, "out", "o", "", "path to output file")
 	encryptCmd.Flags().StringVarP(&config.InputFile, "file", "f", "", "File to encrypt")
 }
