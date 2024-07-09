@@ -1,8 +1,6 @@
 package cmd
 
 import (
-	"fmt"
-
 	"github.com/crytoken/crypto-cli/internal/decrypt"
 	"github.com/spf13/cobra"
 )
@@ -15,7 +13,6 @@ var decryptCmd = &cobra.Command{
 	Short: "decrypt file",
 	Long:  `You can decrypt encrypted files just use --file and --key.`,
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println(decryptCfg)
 		decrypt.Run(decryptCfg)
 	},
 }
