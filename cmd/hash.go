@@ -1,14 +1,14 @@
 /*
 Copyright © 2024 NAME HERE <EMAIL ADDRESS>
-
 */
 package cmd
 
 import (
-	"fmt"
-
+	"github.com/crytoken/crypto-cli/internal/hash"
 	"github.com/spf13/cobra"
 )
+
+var cfg *hash.HashConfig
 
 // hashCmd represents the hash command
 var hashCmd = &cobra.Command{
@@ -21,20 +21,16 @@ Cobra is a CLI library for Go that empowers applications.
 This application is a tool to generate the needed files
 to quickly create a Cobra application.`,
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println("hash called")
+		hash.Run(cfg)
 	},
 }
 
 func init() {
+	cfg = hash.InitHashCfg()
 	rootCmd.AddCommand(hashCmd)
 
-	// Here you will define your flags and configuration settings.
+	hashCmd.Flags().StringVarP(&cfg.Method, "algo", "a", "SHA256", "Choice hash Algorithm")
+	hashCmd.Flags().StringVarP(&cfg.Data, "text", "t", "", "Input text for hashing")
+	hashCmd.Flags().StringVarP(&cfg.InputFile, "file", "f", "", "Choose file for hash")
 
-	// Cobra supports Persistent Flags which will work for this command
-	// and all subcommands, e.g.:
-	// hashCmd.PersistentFlags().String("foo", "", "A help for foo")
-
-	// Cobra supports local flags which will only run when this command
-	// is called directly, e.g.:
-	// hashCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
 }
