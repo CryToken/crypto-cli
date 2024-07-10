@@ -4,6 +4,8 @@ import (
 	"crypto/sha256"
 	"fmt"
 	"os"
+
+	"github.com/crytoken/consl"
 )
 
 func Run(cfg *HashConfig) {
@@ -39,6 +41,7 @@ func sha256Text(cfg *HashConfig) error {
 	hasher := sha256.New()
 	hasher.Write(data)
 	result := fmt.Sprintf("%x", hasher.Sum(nil))
-	fmt.Printf("SHA256 Hash:\n%s\n", result)
+	consl.PrintBlue("SHA256:\n")
+	fmt.Printf("%s\n", result)
 	return nil
 }
