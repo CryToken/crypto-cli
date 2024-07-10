@@ -10,27 +10,6 @@ import (
 	"github.com/crytoken/consl"
 )
 
-func Run(cfg *HashConfig) {
-	err := parseHashCfg(cfg)
-	if err != nil {
-		fmt.Println("Ertor:", err)
-		os.Exit(1)
-	}
-
-	switch cfg.Method {
-	case "SHA256":
-		err := sha256router(cfg)
-		if err != nil {
-			fmt.Println("Hash err:", err)
-		}
-	case "SHA512":
-		err := sha512Router(cfg)
-		if err != nil {
-			fmt.Println("Error:", err)
-		}
-	}
-}
-
 // SHA256 Router and hadlers
 func sha256router(cfg *HashConfig) error {
 	switch cfg.Mode {
