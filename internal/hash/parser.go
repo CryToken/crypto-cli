@@ -1,6 +1,9 @@
 package hash
 
-import "errors"
+import (
+	"errors"
+	"strings"
+)
 
 func parseHashCfg(cfg *HashConfig) error {
 	if cfg.Data == "" && cfg.InputFile == "" {
@@ -15,5 +18,6 @@ func parseHashCfg(cfg *HashConfig) error {
 	if cfg.InputFile != "" {
 		cfg.Mode = "File"
 	}
+	cfg.Method = strings.ToUpper(cfg.Method)
 	return nil
 }
