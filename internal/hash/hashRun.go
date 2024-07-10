@@ -40,6 +40,12 @@ func Run(cfg *HashConfig) {
 		if err != nil {
 			fmt.Println("Error:", err)
 		}
+	case "SHA4":
+		err := sha4Router(cfg)
+		if err != nil {
+			consl.PrintRed("Error; ")
+			fmt.Println(err)
+		}
 	default:
 		supportedAlgo := []string{"SHA1", "SHA256", "SHA512", "SHA3-256", "SHA3-512"}
 		consl.PrintRed("No such algorithm as: ")
