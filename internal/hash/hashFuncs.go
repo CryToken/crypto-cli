@@ -9,20 +9,21 @@ import (
 func Run(cfg *HashConfig) {
 	err := parseHashCfg(cfg)
 	if err != nil {
-		fmt.Println("Somthing went wrong:", err)
+		fmt.Println("Ertor:", err)
 		os.Exit(1)
 	}
 
 	switch cfg.Method {
 	case "SHA256":
-		err := sha256hash(cfg)
+		err := sha256router(cfg)
 		if err != nil {
 			fmt.Println("Hash err:", err)
 		}
 	}
 }
 
-func sha256hash(cfg *HashConfig) error {
+// SHA256 Router and hadlers
+func sha256router(cfg *HashConfig) error {
 	switch cfg.Mode {
 	case "Text":
 		err := sha256Text(cfg)
@@ -38,6 +39,6 @@ func sha256Text(cfg *HashConfig) error {
 	hasher := sha256.New()
 	hasher.Write(data)
 	result := fmt.Sprintf("%x", hasher.Sum(nil))
-	fmt.Println("SHA256 Hash:", result)
+	fmt.Printf("SHA256 Hash:\n%s\n", result)
 	return nil
 }

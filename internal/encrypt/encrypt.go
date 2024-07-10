@@ -12,7 +12,7 @@ import (
 func Run(cfg *Config) {
 	err := parseCfg(cfg)
 	if err != nil {
-		fmt.Println("Somithing went wrorng:", err)
+		fmt.Println("Errors:", err)
 		return
 	}
 	encrypt(cfg)

@@ -16,7 +16,7 @@ func Run(cfg *Config) {
 
 	err = decryptFile(cfg)
 	if err != nil {
-		fmt.Println("Somthing wrong", err)
+		fmt.Println("Error:", err)
 	}
 
 }
