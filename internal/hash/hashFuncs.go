@@ -23,6 +23,11 @@ func Run(cfg *HashConfig) {
 		if err != nil {
 			fmt.Println("Hash err:", err)
 		}
+	case "SHA512":
+		err := sha512Router(cfg)
+		if err != nil {
+			fmt.Println("Error:", err)
+		}
 	}
 }
 
