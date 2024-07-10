@@ -3,6 +3,8 @@ package hash
 import (
 	"fmt"
 	"os"
+
+	"github.com/crytoken/consl"
 )
 
 func Run(cfg *HashConfig) {
@@ -38,5 +40,11 @@ func Run(cfg *HashConfig) {
 		if err != nil {
 			fmt.Println("Error:", err)
 		}
+	default:
+		supportedAlgo := []string{"SHA1", "SHA256", "SHA512", "SHA3-256", "SHA3-512"}
+		consl.PrintRed("No such algorithm as: ")
+		fmt.Println(cfg.Method)
+		consl.PrintGreen("Supported Algorims: ")
+		fmt.Println(supportedAlgo)
 	}
 }
