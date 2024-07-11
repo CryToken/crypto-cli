@@ -13,7 +13,7 @@ var decryptCmd = &cobra.Command{
 	Short: "decrypt file",
 	Long:  `You can decrypt encrypted files just use --file and --key.`,
 	Run: func(cmd *cobra.Command, args []string) {
-		decrypt.Run(decryptCfg)
+		decrypt.Run(decryptCfg, args)
 	},
 }
 
@@ -27,6 +27,7 @@ func init() {
 	decryptCmd.Flags().StringVarP(&decryptCfg.Method, "algo", "a", "AES", "CHhooce algorithm to encrypt File")
 	decryptCmd.Flags().StringVarP(&decryptCfg.MethodMode, "Mode", "M", "CFB", "Mode for Algorithm")
 	decryptCmd.Flags().StringVarP(&decryptCfg.Key, "key", "k", "", "Key for cipher")
+	decryptCmd.Flags().StringVarP(&decryptCfg.KeyMode, "keyHash", "K", "SHA256", "Chooce keyHash mode")
 	decryptCmd.Flags().StringVarP(&decryptCfg.OutputFile, "out", "o", "", "path to output file")
 	decryptCmd.Flags().StringVarP(&decryptCfg.InputFile, "file", "f", "", "File to encrypt")
 

@@ -17,7 +17,7 @@ var encryptCmd = &cobra.Command{
 	To set pass use flag -k or --key,
 	To choice a file to encrypt use flag -f or --file`,
 	Run: func(cmd *cobra.Command, args []string) {
-		encrypt.Run(config)
+		encrypt.Run(config, args)
 	},
 }
 
@@ -32,6 +32,7 @@ func init() {
 	encryptCmd.Flags().StringVarP(&config.Method, "algo", "a", "AES", "CHhooce algorithm to encrypt File")
 	encryptCmd.Flags().StringVarP(&config.MethodMode, "Mode", "M", "CFB", "Mode for Algorithm")
 	encryptCmd.Flags().StringVarP(&config.Key, "key", "k", "", "Key for cipher")
-	encryptCmd.Flags().StringVarP(&config.OutputFile, "out", "o", "", "path to output file")
+	encryptCmd.Flags().StringVarP(&config.KeyMode, "keyHash", "K", "SHA256", "Key mode ,defauld its hash of key")
+	encryptCmd.Flags().StringVarP(&config.OutputFile, "out", "o", "", "name for output file")
 	encryptCmd.Flags().StringVarP(&config.InputFile, "file", "f", "", "File to encrypt")
 }

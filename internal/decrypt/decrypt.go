@@ -8,8 +8,8 @@ import (
 	"io/ioutil"
 )
 
-func Run(cfg *Config) {
-	err := parseCfg(cfg)
+func Run(cfg *Config, args []string) {
+	err := parseCfg(cfg, args)
 	if err != nil {
 		fmt.Println("Decrypting error:", err)
 	}
