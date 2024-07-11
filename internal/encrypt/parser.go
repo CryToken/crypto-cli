@@ -3,6 +3,8 @@ package encrypt
 import (
 	"errors"
 	"fmt"
+	"os"
+	"path/filepath"
 	"strings"
 
 	"github.com/crytoken/consl"
@@ -23,11 +25,13 @@ func parseCfg(cfg *Config, args []string) error {
 
 	if cfg.InputFile == "" && len(args) == 1 {
 		cfg.InputFile = args[0]
-		fmt.Println(args[0])
+
 	}
 
 	if cfg.OutputFile == "" {
-		res := fmt.Sprintf("enc_%s", cfg.InputFile)
+		path, _ := os.Getwd()
+		filename := filepath.Base(cfg.InputFile)
+		res := fmt.Sprintf("%s/enc_%s", path, filename)
 		cfg.OutputFile = res
 	}
 	switch cfg.KeyMode {
