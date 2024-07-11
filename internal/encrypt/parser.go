@@ -14,6 +14,8 @@ import (
 
 func parseCfg(cfg *Config, args []string) error {
 	cfg.KeyMode = strings.ToUpper(cfg.KeyMode)
+	cfg.MethodMode = strings.ToUpper(cfg.MethodMode)
+
 	//Check that key is not empty
 	if cfg.Key == "" {
 		return errors.New("enter key by -k flag")

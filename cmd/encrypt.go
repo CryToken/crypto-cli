@@ -30,7 +30,7 @@ func init() {
 
 	// Add flags to the encrypt command
 	encryptCmd.Flags().StringVarP(&config.Method, "algo", "a", "AES", "CHhooce algorithm to encrypt File")
-	encryptCmd.Flags().StringVarP(&config.MethodMode, "Mode", "M", "CFB", "Mode for Algorithm")
+	encryptCmd.Flags().StringVarP(&config.MethodMode, "Mode", "M", "GCM", "Mode for Algorithm")
 	encryptCmd.Flags().StringVarP(&config.Key, "key", "k", "", "Key for cipher")
 	encryptCmd.Flags().StringVarP(&config.KeyMode, "keyHash", "K", "SHA256", "Key mode ,defauld its hash of key")
 	encryptCmd.Flags().StringVarP(&config.OutputFile, "out", "o", "", "name for output file")

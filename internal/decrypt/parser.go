@@ -3,6 +3,8 @@ package decrypt
 import (
 	"errors"
 	"fmt"
+	"os"
+	"path/filepath"
 	"strings"
 
 	"github.com/crytoken/consl"
@@ -12,6 +14,7 @@ import (
 
 func parseCfg(cfg *Config, args []string) error {
 	cfg.KeyMode = strings.ToUpper(cfg.KeyMode)
+	cfg.MethodMode = strings.ToUpper(cfg.MethodMode)
 	//Check that key is not empty
 	if cfg.Key == "" {
 		return errors.New("enter key by -k flag")
@@ -25,7 +28,9 @@ func parseCfg(cfg *Config, args []string) error {
 	}
 
 	if cfg.OutputFile == "" {
-		res := fmt.Sprintf("%s_decr", cfg.InputFile)
+		path, _ := os.Getwd()
+		filename := filepath.Base(cfg.InputFile)
+		res := fmt.Sprintf("%s/decr_%s", path, filename)
 		cfg.OutputFile = res
 	}
 	switch cfg.KeyMode {

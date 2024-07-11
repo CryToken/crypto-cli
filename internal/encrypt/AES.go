@@ -116,6 +116,7 @@ func encryptAES_GCM(cfg *Config) error {
 	if outDir == currentDir {
 		cfg.OutputFile = filepath.Base(cfg.OutputFile)
 	}
+
 	consl.PrintGreen("Success:\n")
 	consl.PrintCyan("    Encrypted File -> ")
 	fmt.Println(cfg.OutputFile)

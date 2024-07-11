@@ -25,7 +25,7 @@ func init() {
 	// Here you will define your flags and configuration settings.
 
 	decryptCmd.Flags().StringVarP(&decryptCfg.Method, "algo", "a", "AES", "CHhooce algorithm to encrypt File")
-	decryptCmd.Flags().StringVarP(&decryptCfg.MethodMode, "Mode", "M", "CFB", "Mode for Algorithm")
+	decryptCmd.Flags().StringVarP(&decryptCfg.MethodMode, "Mode", "M", "GCM", "Mode for Algorithm")
 	decryptCmd.Flags().StringVarP(&decryptCfg.Key, "key", "k", "", "Key for cipher")
 	decryptCmd.Flags().StringVarP(&decryptCfg.KeyMode, "keyHash", "K", "SHA256", "Chooce keyHash mode")
 	decryptCmd.Flags().StringVarP(&decryptCfg.OutputFile, "out", "o", "", "path to output file")

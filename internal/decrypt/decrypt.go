@@ -1,11 +1,7 @@
 package decrypt
 
 import (
-	"crypto/aes"
-	"crypto/cipher"
-	"errors"
 	"fmt"
-	"io/ioutil"
 )
 
 func Run(cfg *Config, args []string) {
@@ -39,29 +35,11 @@ func decryptAesRouter(cfg *Config) error {
 		if err != nil {
 			return err
 		}
-	}
-	return nil
-}
-
-func decryptAesCFB(cfg *Config) error {
-	cipherFile, err := ioutil.ReadFile(cfg.InputFile)
-	if err != nil {
-		return errors.New("reading cipherFile err")
-	}
-
-	block, err := aes.NewCipher(cfg.KeyHash)
-	if err != nil {
-		return errors.New("err to create block")
-	}
-	iv := cipherFile[:aes.BlockSize]
-	cipherFile = cipherFile[aes.BlockSize:]
-
-	stream := cipher.NewCFBDecrypter(block, iv)
-	stream.XORKeyStream(cipherFile, cipherFile)
-
-	err = ioutil.WriteFile(cfg.OutputFile, cipherFile, 0644)
-	if err != nil {
-		return errors.New("err to write to file")
+	case "GCM":
+		err := decryptAES_GCM(cfg)
+		if err != nil {
+			return err
+		}
 	}
 	return nil
 }
