@@ -1,6 +1,6 @@
 module github.com/crytoken/crypto-cli
 
-go 1.22.4
+go 1.22.3
 
 require (
 	github.com/crytoken/consl v0.0.0-20240424061253-4c22e193b70a
