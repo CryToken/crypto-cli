@@ -24,7 +24,7 @@ func Run(cfg *Config, args []string) {
 func decryptFile(cfg *Config) error {
 	switch cfg.Method {
 	case "AES":
-		err := decryptAes(cfg)
+		err := decryptAesRouter(cfg)
 		if err != nil {
 			return err
 		}
@@ -32,7 +32,7 @@ func decryptFile(cfg *Config) error {
 	return nil
 }
 
-func decryptAes(cfg *Config) error {
+func decryptAesRouter(cfg *Config) error {
 	switch cfg.MethodMode {
 	case "CFB":
 		err := decryptAesCFB(cfg)
