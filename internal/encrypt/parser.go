@@ -18,7 +18,12 @@ func parseCfg(cfg *Config, args []string) error {
 
 	//Check that key is not empty
 	if cfg.Key == "" {
-		return errors.New("enter key by -k flag")
+		err := utils.SetKeyValue(&cfg.Key)
+		if err != nil {
+			return err
+		}
+
+		//return errors.New("enter key by -k flag")
 	}
 	//Check the InputFile is choicen
 	if cfg.InputFile == "" && len(args) < 1 {
