@@ -26,7 +26,11 @@ func parseCfg(cfg *Config, args []string) error {
 	}
 	//Check the InputFile is choicen
 	if cfg.InputFile == "" && len(args) < 1 {
-		return errors.New("choice file by -f flag or by argument")
+		err := utils.SelectFile(&cfg.InputFile)
+		if err != nil {
+			return err
+		}
+		//return errors.New("choice file by -f flag or by argument")
 	}
 	if cfg.InputFile == "" && len(args) == 1 {
 		cfg.InputFile = args[0]
