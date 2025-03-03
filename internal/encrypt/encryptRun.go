@@ -2,12 +2,15 @@ package encrypt
 
 import (
 	"fmt"
+
+	"github.com/crytoken/consl"
 )
 
 func Run(cfg *Config, args []string) {
 	err := parseCfg(cfg, args)
 	if err != nil {
-		fmt.Println("Errors:", err)
+		consl.PrintRed("Error-> ")
+		fmt.Println(err)
 		return
 	}
 	encryptRouter(cfg)

@@ -22,6 +22,9 @@ func parseCfg(cfg *Config, args []string) error {
 		if err != nil {
 			return err
 		}
+		if cfg.InputFile == "" {
+			return errors.New("file choice reqired")
+		}
 		//return errors.New("chooce file by -f flag or by argument")
 	}
 

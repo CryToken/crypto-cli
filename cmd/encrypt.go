@@ -9,7 +9,7 @@ import (
 var config *encrypt.Config
 
 // encryptCmd represents the encrypt command
-var encryptCmd = &cobra.Command{
+var EncryptCmd = &cobra.Command{
 	Use:   "encrypt",
 	Short: "Encrypt file",
 	Long: `You can encrypt file with some algorithms:
@@ -24,6 +24,7 @@ var encryptCmd = &cobra.Command{
 func init() {
 	// Initialize the config
 	config = encrypt.InitCfg()
+	encryptCmd := EncryptCmd
 
 	// Add the encrypt command to the root command
 	rootCmd.AddCommand(encryptCmd)
