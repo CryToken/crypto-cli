@@ -47,7 +47,7 @@ func Run(cfg *HashConfig) {
 			fmt.Println(err)
 		}
 	default:
-		supportedAlgo := []string{"SHA1", "SHA256", "SHA512", "SHA3-256", "SHA3-512", "SHA4"}
+		//supportedAlgo := []string{"SHA1", "SHA256", "SHA512", "SHA3-256", "SHA3-512", "SHA4"}
 		consl.PrintRed("No such algorithm as: ")
 		fmt.Println(cfg.Method)
 		consl.PrintGreen("Supported Algorims: ")

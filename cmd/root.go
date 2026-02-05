@@ -7,7 +7,7 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/crytoken/crypto-cli/internal/utils"
+	"github.com/crytoken/crypto-cli/internal/tui"
 	"github.com/spf13/cobra"
 )
 
@@ -28,7 +28,8 @@ to quickly create a Cobra application.`,
 	Run: func(cmd *cobra.Command, args []string) {
 		if isAdvanced {
 			fmt.Println("Advanced root")
-			EncryptCmd.Run(cmd, args)
+
+			selectFunction(cmd, args)
 		} else {
 			selectFunction(cmd, args)
 		}
@@ -60,9 +61,11 @@ func init() {
 
 func selectFunction(cmd *cobra.Command, args []string) {
 	functions := []string{"Encrypt", "Decrypt", "Hash", "Sign", "Verify", "Checksum"}
-	f := utils.ChooseItem(functions)
+	//f := utils.ChooseItem(functions)
+	f := tui.ChoiceItem(functions)
 	switch f {
 	case "Encrypt":
+		fmt.Println(args)
 		EncryptCmd.Run(cmd, args)
 	case "Decrypt":
 		decryptCmd.Run(cmd, args)

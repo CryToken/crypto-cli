@@ -8,6 +8,7 @@ import (
 	"strings"
 
 	"github.com/crytoken/consl"
+	"github.com/crytoken/crypto-cli/internal/tui"
 	"github.com/crytoken/crypto-cli/internal/utils"
 	"github.com/crytoken/crypto-cli/pkg/sha4"
 )
@@ -18,7 +19,10 @@ func parseCfg(cfg *Config, args []string) error {
 
 	//Check the InputFile is choicen
 	if cfg.InputFile == "" && len(args) < 1 {
-		err := utils.SelectFile(&cfg.InputFile)
+		//err := utils.SelectFile(&cfg.InputFile)
+
+		err := tui.SelectFile(&cfg.InputFile)
+		fmt.Println(cfg.InputFile)
 		if err != nil {
 			return err
 		}
@@ -46,7 +50,7 @@ func parseCfg(cfg *Config, args []string) error {
 	if cfg.OutputFile == "" {
 		path, _ := os.Getwd()
 		filename := filepath.Base(cfg.InputFile)
-		res := fmt.Sprintf("%s/enc_%s", path, filename)
+		res := fmt.Sprintf("%s/%s_enc", path, filename)
 		cfg.OutputFile = res
 	}
 	switch cfg.KeyMode {

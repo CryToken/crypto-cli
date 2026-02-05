@@ -13,13 +13,10 @@ var cfg *hash.HashConfig
 // hashCmd represents the hash command
 var hashCmd = &cobra.Command{
 	Use:   "hash",
-	Short: "A brief description of your command",
-	Long: `A longer description that spans multiple lines and likely contains examples
-and usage of using your command. For example:
-
-Cobra is a CLI library for Go that empowers applications.
-This application is a tool to generate the needed files
-to quickly create a Cobra application.`,
+	Short: "Hash data",
+	Long: `You can hash file -f flag or text -t
+	Choose Alogrithm with -a flag ("default:SHA-256")
+	Also you may dont provide any flags to start interactive TUI menu.`,
 	Run: func(cmd *cobra.Command, args []string) {
 		hash.Run(cfg)
 	},
@@ -32,5 +29,6 @@ func init() {
 	hashCmd.Flags().StringVarP(&cfg.Method, "algo", "a", "SHA256", "Choice hash Algorithm")
 	hashCmd.Flags().StringVarP(&cfg.Data, "text", "t", "", "Input text for hashing")
 	hashCmd.Flags().StringVarP(&cfg.InputFile, "file", "f", "", "Choose file for hash")
+	hashCmd.Flags().BoolVarP(&cfg.IsAdnvanced, "advance", "", false, "Advance mod for.")
 
 }
