@@ -36,6 +36,7 @@ func parentDir(path string) string {
 		return "/"
 	}
 	return parent
+
 }
 
 func stringToOptions(list []string) []huh.Option[string] {

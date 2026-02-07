@@ -1,40 +1,39 @@
 /*
 Copyright © 2024 NAME HERE <EMAIL ADDRESS>
-
 */
 package cmd
 
 import (
-	"fmt"
-
+	"github.com/crytoken/crypto-cli/internal/sign"
 	"github.com/spf13/cobra"
 )
+
+var signCfg *sign.SignConfig
 
 // signCmd represents the sign command
 var signCmd = &cobra.Command{
 	Use:   "sign",
-	Short: "A brief description of your command",
-	Long: `A longer description that spans multiple lines and likely contains examples
-and usage of using your command. For example:
+	Short: "Sign your data",
+	Long: `You can sign your data (-f flag) or Message (-m flag) with provided private key (-k flag).
 
-Cobra is a CLI library for Go that empowers applications.
-This application is a tool to generate the needed files
-to quickly create a Cobra application.`,
+	Provided private key should be in .pem format and contain private key for one of supported alogrithms
+
+	Supported Alogorithms: ECDSA,
+	`,
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println("sign called")
+
+		sign.Run(signCfg)
 	},
 }
 
 func init() {
+	signCfg = sign.InitSignConfig()
+
 	rootCmd.AddCommand(signCmd)
 
-	// Here you will define your flags and configuration settings.
+	signCmd.Flags().StringVarP(&signCfg.Algorithm, "algorithm", "a", "ECDSA", "you can sign data with provided key(-k flag)")
+	signCmd.Flags().StringVarP(&signCfg.KeyFile, "key", "k", "", "use keyFile for sign data")
+	signCmd.Flags().StringVarP(&signCfg.Input, "input", "f", "", "choose file to sign")
+	signCmd.Flags().StringVarP(&signCfg.Output, "out", "o", "signature", "provide filename to write signature")
 
-	// Cobra supports Persistent Flags which will work for this command
-	// and all subcommands, e.g.:
-	// signCmd.PersistentFlags().String("foo", "", "A help for foo")
-
-	// Cobra supports local flags which will only run when this command
-	// is called directly, e.g.:
-	// signCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
 }
