@@ -72,6 +72,10 @@ func selectFunction(cmd *cobra.Command, args []string) {
 		decryptCmd.Run(cmd, args)
 	case "Hash":
 		hashCmd.Run(cmd, args)
+	case "Sign":
+		signCmd.Run(cmd, args)
+	case "Verify":
+		verifyCmd.Run(cmd, args)
 	}
 
 }

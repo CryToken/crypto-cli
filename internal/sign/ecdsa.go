@@ -3,8 +3,10 @@ package sign
 import (
 	"crypto/ecdsa"
 	"crypto/rand"
+	"crypto/sha256"
 	"encoding/pem"
 	"errors"
+	"fmt"
 	"io"
 	"os"
 )
@@ -29,6 +31,11 @@ func signECDSA(cfg *SignConfig) error {
 		return err
 	}
 	pemBlock, _ := pem.Decode(buf)
+	if pemBlock == nil {
+		fmt.Println("Invalid PEM key format ")
+		os.Exit(1)
+	}
+
 	prvKey, err := ecdsa.ParseRawPrivateKey(cfg.Curve, pemBlock.Bytes)
 	if err != nil {
 		return errParsingPrivKey
@@ -39,7 +46,8 @@ func signECDSA(cfg *SignConfig) error {
 	if err != nil {
 		return err
 	}
-	signature, err := ecdsa.SignASN1(rand.Reader, prvKey, dataToSign)
+	dataHash := sha256.Sum256(dataToSign)
+	signature, err := ecdsa.SignASN1(rand.Reader, prvKey, dataHash[:])
 	if err != nil {
 		return err
 	}
@@ -48,6 +56,7 @@ func signECDSA(cfg *SignConfig) error {
 		return err
 	}
 
+	fmt.Println("File signed succesfuly.\nSignature save in:", cfg.Output)
 	return nil
 }
 

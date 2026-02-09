@@ -9,6 +9,7 @@ var (
 	ecdsaStr string = "ECDSA"
 	rsaStr   string = "RSA"
 	dsaStr   string = "DSA"
+	ed25516  string = "ed-25516"
 )
 var (
 	sha256Str string = "SHA-256"
@@ -29,10 +30,10 @@ type SignConfig struct {
 
 func InitSignConfig() *SignConfig {
 	return &SignConfig{
-		HashAlgo: "SHA-256",
+		HashAlgo: sha256Str,
 		Curve:    elliptic.P256(),
 	}
 }
 
-var supportedSignAlogos []string = []string{ecdsaStr, rsaStr, dsaStr}
+var supportedSignAlogos []string = []string{ecdsaStr, rsaStr, dsaStr, ed25516}
 var supportedHashAlogos []string = []string{sha256Str, sha512Str, argon2Str}

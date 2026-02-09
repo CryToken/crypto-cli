@@ -1,14 +1,16 @@
 /*
 Copyright © 2024 NAME HERE <EMAIL ADDRESS>
-
 */
 package cmd
 
 import (
 	"fmt"
 
+	"github.com/crytoken/crypto-cli/internal/verify"
 	"github.com/spf13/cobra"
 )
+
+var verifyConfig *verify.VeryfiConfig
 
 // verifyCmd represents the verify command
 var verifyCmd = &cobra.Command{
@@ -21,20 +23,19 @@ Cobra is a CLI library for Go that empowers applications.
 This application is a tool to generate the needed files
 to quickly create a Cobra application.`,
 	Run: func(cmd *cobra.Command, args []string) {
+
+		verify.Run(verifyConfig)
 		fmt.Println("verify called")
 	},
 }
 
 func init() {
+	verifyConfig = verify.InitConfig()
 	rootCmd.AddCommand(verifyCmd)
 
-	// Here you will define your flags and configuration settings.
-
-	// Cobra supports Persistent Flags which will work for this command
-	// and all subcommands, e.g.:
-	// verifyCmd.PersistentFlags().String("foo", "", "A help for foo")
-
-	// Cobra supports local flags which will only run when this command
-	// is called directly, e.g.:
-	// verifyCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
+	verifyCmd.Flags().StringVarP(&verifyConfig.Algorithm, "algorithm", "a", "ECDSA", "Choose alogorithm to verify.")
+	verifyCmd.Flags().StringVarP(&verifyConfig.Data, "file", "f", "", "choose file.")
+	verifyCmd.Flags().StringVarP(&verifyConfig.PublicKey, "key", "k", "", "Choose public key file.")
+	verifyCmd.Flags().StringVarP(&verifyConfig.Signature, "signature", "s", "", "Choose signature file.")
+	verifyCmd.Flags().StringVar(&verifyConfig.HashAlgo, "hash", "SHA-256", "select data hash algorithm.")
 }
