@@ -4,6 +4,7 @@ import (
 	"crypto/ecdsa"
 	"crypto/rand"
 	"crypto/sha256"
+	"crypto/x509"
 	"encoding/pem"
 	"errors"
 	"fmt"
@@ -36,7 +37,7 @@ func signECDSA(cfg *SignConfig) error {
 		os.Exit(1)
 	}
 
-	prvKey, err := ecdsa.ParseRawPrivateKey(cfg.Curve, pemBlock.Bytes)
+	prvKey, err := x509.ParseECPrivateKey(pemBlock.Bytes)
 	if err != nil {
 		return errParsingPrivKey
 	}

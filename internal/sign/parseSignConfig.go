@@ -16,6 +16,9 @@ var (
 )
 
 func (cfg *SignConfig) Parse() error {
+	if cfg.Algorithm == "" {
+		cfg.Algorithm = tui.ChoiceItem(supportedSignAlogos)
+	}
 	//Check sing algoruhms
 	cfg.Algorithm = strings.ToUpper(cfg.Algorithm)
 	if ok := isSupportedAlgo(cfg.Algorithm); !ok {

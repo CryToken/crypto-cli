@@ -16,9 +16,10 @@ var (
 )
 
 var (
-	ecdsaStr string = "ECDSA"
-	rsaStr   string = "RSA"
-	dsaStr   string = "DSA"
+	ecdsaStr   string = "ECDSA"
+	rsaStr     string = "RSA"
+	dsaStr     string = "DSA"
+	ed25519Str string = "ED-25519"
 )
 var (
 	sha256Str string = "SHA-256"
@@ -26,7 +27,7 @@ var (
 	argon2Str string = "argon2"
 )
 
-var supportedVerifyAlogos []string = []string{ecdsaStr, rsaStr, dsaStr}
+var supportedVerifyAlogos []string = []string{ecdsaStr, rsaStr, dsaStr, ed25519Str}
 var supportedHashAlogos []string = []string{sha256Str, sha512Str, argon2Str}
 
 func isSupportedVerifyAlgo(algo string) bool {
@@ -50,7 +51,9 @@ func isSupportedHashAlgo(algo string) bool {
 }
 
 func (cfg *VeryfiConfig) Parse() error {
-
+	if cfg.Algorithm == "" {
+		cfg.Algorithm = tui.ChoiceItem(supportedVerifyAlogos)
+	}
 	if ok := isSupportedVerifyAlgo(strings.ToUpper(cfg.Algorithm)); !ok {
 		return errNotSupportedVerifyAlgo
 	}
@@ -66,6 +69,7 @@ func (cfg *VeryfiConfig) Parse() error {
 			return errEmptyKeyFile
 		}
 		cfg.Data = dataFileChoose
+		fmt.Print(cfg.Data, "\n")
 	}
 
 	if cfg.PublicKey == "" {

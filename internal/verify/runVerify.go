@@ -3,6 +3,8 @@ package verify
 import (
 	"fmt"
 	"os"
+
+	"github.com/crytoken/consl"
 )
 
 func Run(cfg *VeryfiConfig) {
@@ -17,7 +19,12 @@ func Run(cfg *VeryfiConfig) {
 			fmt.Println(err)
 			os.Exit(1)
 		}
-		fmt.Println("Signature: is Valid.")
+		consl.PrintGreen("Signature: is valid.\n")
 		os.Exit(0)
+	case ed25519Str:
+		if err := verifyEd25519(cfg); err != nil {
+			consl.PrintRed(err, "\n")
+			os.Exit(1)
+		}
 	}
 }

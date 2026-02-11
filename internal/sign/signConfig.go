@@ -6,10 +6,10 @@ import (
 )
 
 var (
-	ecdsaStr string = "ECDSA"
-	rsaStr   string = "RSA"
-	dsaStr   string = "DSA"
-	ed25516  string = "ed-25516"
+	ecdsaStr   string = "ECDSA"
+	rsaStr     string = "RSA"
+	dsaStr     string = "DSA"
+	ed25516Str string = "ED-25516"
 )
 var (
 	sha256Str string = "SHA-256"
@@ -35,5 +35,5 @@ func InitSignConfig() *SignConfig {
 	}
 }
 
-var supportedSignAlogos []string = []string{ecdsaStr, rsaStr, dsaStr, ed25516}
+var supportedSignAlogos []string = []string{ecdsaStr, rsaStr, dsaStr, ed25516Str}
 var supportedHashAlogos []string = []string{sha256Str, sha512Str, argon2Str}

@@ -2,8 +2,8 @@ package verify
 
 import (
 	"crypto/ecdsa"
-	"crypto/elliptic"
 	"crypto/sha256"
+	"crypto/x509"
 	"encoding/pem"
 	"errors"
 	"fmt"
@@ -11,7 +11,7 @@ import (
 )
 
 func verifyECDSA(cfg *VeryfiConfig) error {
-	fmt.Println("Pubkey filepath:", cfg.PublicKey)
+
 	pubkeyPEM, err := os.ReadFile(cfg.PublicKey)
 	if err != nil {
 		return err
@@ -24,18 +24,29 @@ func verifyECDSA(cfg *VeryfiConfig) error {
 		os.Exit(1)
 	}
 
-	fmt.Printf("Public key hex:%x\n", block.Bytes)
-	pubKey, err := ecdsa.ParseUncompressedPublicKey(elliptic.P256(), block.Bytes)
+	//fmt.Printf("Public key hex:%x\n", block.Bytes)
+	pubKeyX, err := x509.ParsePKIXPublicKey(block.Bytes)
 	if err != nil {
 		return err
 	}
-	fmt.Printf("Pub key struct : %+v\n", pubKey)
+	pubKey, ok := pubKeyX.(*ecdsa.PublicKey)
+	if !ok {
+		return errors.New("parsing public key error")
+	}
+	//fmt.Printf("Pub key struct : %+v\n", pubKey)
 
+	//Readimg signature
 	signature, err := os.ReadFile(cfg.Signature)
 	if err != nil {
 		return err
 	}
-	dataHash := sha256.Sum256([]byte(cfg.Data))
+	//Reading data
+	dataToVerify, err := os.ReadFile(cfg.Data)
+	if err != nil {
+		return err
+	}
+
+	dataHash := sha256.Sum256(dataToVerify)
 	if ok := ecdsa.VerifyASN1(pubKey, dataHash[:], signature); !ok {
 		return errors.New("verify failed")
 	}

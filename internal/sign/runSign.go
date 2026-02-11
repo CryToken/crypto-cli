@@ -29,5 +29,10 @@ func Run(cfg *SignConfig) {
 			fmt.Printf("dsa signig failed:%s\n", err)
 			os.Exit(1)
 		}
+	case ed25516Str:
+		if err := signEd25516(cfg); err != nil {
+			fmt.Printf("ed-25516 signig failed:%s\n", err)
+			os.Exit(1)
+		}
 	}
 }

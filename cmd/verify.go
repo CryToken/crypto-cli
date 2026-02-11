@@ -4,8 +4,6 @@ Copyright © 2024 NAME HERE <EMAIL ADDRESS>
 package cmd
 
 import (
-	"fmt"
-
 	"github.com/crytoken/crypto-cli/internal/verify"
 	"github.com/spf13/cobra"
 )
@@ -25,7 +23,7 @@ to quickly create a Cobra application.`,
 	Run: func(cmd *cobra.Command, args []string) {
 
 		verify.Run(verifyConfig)
-		fmt.Println("verify called")
+
 	},
 }
 
@@ -33,7 +31,7 @@ func init() {
 	verifyConfig = verify.InitConfig()
 	rootCmd.AddCommand(verifyCmd)
 
-	verifyCmd.Flags().StringVarP(&verifyConfig.Algorithm, "algorithm", "a", "ECDSA", "Choose alogorithm to verify.")
+	verifyCmd.Flags().StringVarP(&verifyConfig.Algorithm, "algorithm", "a", "", "Choose alogorithm to verify.")
 	verifyCmd.Flags().StringVarP(&verifyConfig.Data, "file", "f", "", "choose file.")
 	verifyCmd.Flags().StringVarP(&verifyConfig.PublicKey, "key", "k", "", "Choose public key file.")
 	verifyCmd.Flags().StringVarP(&verifyConfig.Signature, "signature", "s", "", "Choose signature file.")

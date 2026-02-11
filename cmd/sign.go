@@ -31,7 +31,7 @@ func init() {
 
 	rootCmd.AddCommand(signCmd)
 
-	signCmd.Flags().StringVarP(&signCfg.Algorithm, "algorithm", "a", "ECDSA", "you can sign data with provided key(-k flag)")
+	signCmd.Flags().StringVarP(&signCfg.Algorithm, "algorithm", "a", "", "you can sign data with provided key(-k flag)")
 	signCmd.Flags().StringVarP(&signCfg.KeyFile, "key", "k", "", "use keyFile for sign data")
 	signCmd.Flags().StringVarP(&signCfg.Input, "input", "f", "", "choose file to sign")
 	signCmd.Flags().StringVarP(&signCfg.Output, "out", "o", "signature", "provide filename to write signature")
