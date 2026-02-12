@@ -62,6 +62,14 @@ func (cfg *VeryfiConfig) Parse() error {
 		return errNotSupportedHashAlgo
 	}
 
+	if cfg.PublicKey == "" {
+		fmt.Println("Choose public key file:")
+		var keyFile string
+		if err := tui.SelectFile(&keyFile); err != nil {
+			return errEmptyKeyFile
+		}
+		cfg.PublicKey = keyFile
+	}
 	if cfg.Data == "" {
 		fmt.Println("Choose data file:")
 		var dataFileChoose string
@@ -70,15 +78,6 @@ func (cfg *VeryfiConfig) Parse() error {
 		}
 		cfg.Data = dataFileChoose
 		fmt.Print(cfg.Data, "\n")
-	}
-
-	if cfg.PublicKey == "" {
-		fmt.Println("Choose public key file:")
-		var keyFile string
-		if err := tui.SelectFile(&keyFile); err != nil {
-			return errEmptyKeyFile
-		}
-		cfg.PublicKey = keyFile
 	}
 
 	if cfg.Signature == "" {

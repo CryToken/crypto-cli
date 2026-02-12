@@ -3,8 +3,9 @@ package genkey
 import (
 	"errors"
 	"fmt"
-	"os"
 	"strings"
+
+	"github.com/crytoken/crypto-cli/internal/tui"
 )
 
 var (
@@ -39,9 +40,9 @@ func parseGenkeyConfig(cfg *GenkeyConfig, args []string) error {
 		}
 		cfg.Type = strings.ToUpper(args[0])
 	} else {
+		fmt.Println("Select key type:")
 		if cfg.Type == "" {
-			fmt.Println("You should set type of key pair with arg or -t flag")
-			os.Exit(1)
+			cfg.Type = tui.ChoiceItem(supportedTypes)
 		}
 		if ok := isSupportedGenkeyType(cfg.Type); !ok {
 			return errNotSupportedType

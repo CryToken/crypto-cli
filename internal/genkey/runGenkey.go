@@ -20,6 +20,12 @@ func Run(cfg *GenkeyConfig, args []string) {
 			fmt.Println(err)
 			os.Exit(1)
 		}
+	case ed25519Str:
+		if err := generateED25519keyPair(cfg.Output); err != nil {
+			consl.PrintRed("Ed-25519 key pair generation failed: ")
+			fmt.Println(err)
+			os.Exit(1)
+		}
 
 	}
 }
