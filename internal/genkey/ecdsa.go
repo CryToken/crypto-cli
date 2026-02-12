@@ -5,7 +5,6 @@ import (
 	"crypto/elliptic"
 	"crypto/rand"
 	"crypto/x509"
-	"encoding/hex"
 	"encoding/pem"
 	"errors"
 	"fmt"
@@ -26,7 +25,6 @@ func generateECDSAkeyPair(out string) error {
 		return errGenPrivateKey
 	}
 	prvKeyBytes, _ := x509.MarshalECPrivateKey(prvKey)
-	//fmt.Println("Priv key hex:", hex.EncodeToString(prvKeyBytes))
 
 	block := pem.Block{
 		Type:  "EC PRIVATE KEY",
@@ -40,7 +38,7 @@ func generateECDSAkeyPair(out string) error {
 
 	//Pubkey save part
 	pubKeyBytes, _ := x509.MarshalPKIXPublicKey(&prvKey.PublicKey)
-	fmt.Println("Pub key hex:", hex.EncodeToString(pubKeyBytes))
+
 	pubBlock := pem.Block{
 		Type:  "PUBLIC KEY",
 		Bytes: pubKeyBytes,

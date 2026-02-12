@@ -26,6 +26,12 @@ func Run(cfg *GenkeyConfig, args []string) {
 			fmt.Println(err)
 			os.Exit(1)
 		}
+	case rsaStr:
+		if err := generateRSAkeyPair(cfg.Output); err != nil {
+			consl.PrintRed("RSA key pair generation failed: ")
+			fmt.Println(err)
+			os.Exit(1)
+		}
 
 	}
 }

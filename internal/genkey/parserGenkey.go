@@ -10,7 +10,8 @@ import (
 
 var (
 	errNotSupportedType error = errors.New("not supported key type")
-	errNoOutFile        error = errors.New("there is no output file")
+
+	errScanInput error = errors.New("scan input failed")
 )
 
 var (
@@ -52,9 +53,20 @@ func parseGenkeyConfig(cfg *GenkeyConfig, args []string) error {
 
 	//Output file path checking
 	if cfg.Output == "" {
-		fmt.Println("You must provide provide output file name by -o flag.")
-		return errNoOutFile
+		var userInput string
+		printEnterOutput(cfg.Type)
+		fmt.Scanln(&userInput)
+
+		cfg.Output = userInput
+	}
+
+	if cfg.Output == "" {
+		cfg.Output = strings.ToLower(cfg.Type)
 	}
 
 	return nil
+}
+
+func printEnterOutput(t string) {
+	fmt.Printf("Enter out file name (default: %s):", strings.ToLower(t))
 }

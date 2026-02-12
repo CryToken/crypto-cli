@@ -70,6 +70,7 @@ func (cfg *VeryfiConfig) Parse() error {
 		}
 		cfg.PublicKey = keyFile
 	}
+
 	if cfg.Data == "" {
 		fmt.Println("Choose data file:")
 		var dataFileChoose string
