@@ -61,7 +61,7 @@ func init() {
 }
 
 func selectFunction(cmd *cobra.Command, args []string) {
-	functions := []string{"Encrypt", "Decrypt", "Hash", "Sign", "Verify", "Checksum"}
+	functions := []string{"Encrypt", "Decrypt", "Hash", "Sign", "Verify", "Genkey", "Checksum"}
 	//f := utils.ChooseItem(functions)
 	f := tui.ChoiceItem(functions)
 	switch f {
@@ -76,6 +76,8 @@ func selectFunction(cmd *cobra.Command, args []string) {
 		signCmd.Run(cmd, args)
 	case "Verify":
 		verifyCmd.Run(cmd, args)
+	case "Genkey":
+		genKeyCmd.Run(cmd, args)
 	}
 
 }
