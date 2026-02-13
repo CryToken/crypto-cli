@@ -13,6 +13,8 @@ var (
 	errNotSupportedSignAlgo error = errors.New("not supported sign alogorithm")
 	errNotSupportedHashAlgo error = errors.New("not supported hash alogorithm")
 	errEmptyKeyFile         error = errors.New("key file must be set by (-k flag)")
+	errInvalidPem           error = errors.New("invalid pem file format")
+	errReadingFile          error = errors.New("reading file failed")
 )
 
 func (cfg *SignConfig) Parse() error {

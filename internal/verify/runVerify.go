@@ -26,5 +26,10 @@ func Run(cfg *VeryfiConfig) {
 			consl.PrintRed(err, "\n")
 			os.Exit(1)
 		}
+	case rsaStr:
+		if err := verifyRSA(cfg); err != nil {
+			consl.PrintRed(err, "\n")
+			os.Exit(1)
+		}
 	}
 }

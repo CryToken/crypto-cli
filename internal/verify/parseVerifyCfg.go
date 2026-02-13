@@ -13,6 +13,7 @@ var (
 	errNotSupportedHashAlgo   error = errors.New("not supported hash alogorithm")
 	errEmptyKeyFile           error = errors.New("key file must be set by (-k flag)")
 	errEmptySigFile           error = errors.New("signature file is reqired (-s flag)")
+	errInvalidPem             error = errors.New("invalid pem file format")
 )
 
 var (
