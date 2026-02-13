@@ -10,8 +10,6 @@ import (
 
 var (
 	errNotSupportedType error = errors.New("not supported key type")
-
-	errScanInput error = errors.New("scan input failed")
 )
 
 var (

@@ -20,7 +20,7 @@ func SelectFile(res *string) error {
 	options := stringToOptions(dirEntries)
 
 	var choice string
-	tuiTheme := huh.ThemeCatppuccin()
+	tuiTheme := huh.ThemeBase()
 	huh.NewSelect[string]().Title("Select file").Options(options...).Value(&choice).Height(8).WithTheme(tuiTheme).Run()
 
 	for {
