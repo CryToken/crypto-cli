@@ -16,9 +16,9 @@ var (
 )
 
 var (
-	ecdsaStr   string = "ECDSA"
-	rsaStr     string = "RSA"
-	dsaStr     string = "DSA"
+	ecdsaStr string = "ECDSA"
+	rsaStr   string = "RSA"
+
 	ed25519Str string = "ED-25519"
 )
 var (
@@ -27,7 +27,7 @@ var (
 	argon2Str string = "argon2"
 )
 
-var supportedVerifyAlogos []string = []string{ecdsaStr, rsaStr, dsaStr, ed25519Str}
+var supportedVerifyAlogos []string = []string{ecdsaStr, rsaStr, ed25519Str}
 var supportedHashAlogos []string = []string{sha256Str, sha512Str, argon2Str}
 
 func isSupportedVerifyAlgo(algo string) bool {
