@@ -13,13 +13,13 @@ var (
 )
 
 var (
-	ecdsaStr   string = "ECDSA"
-	rsaStr     string = "RSA"
-	dsaStr     string = "DSA"
+	ecdsaStr string = "ECDSA"
+	rsaStr   string = "RSA"
+
 	ed25519Str string = "ED-25519"
 )
 
-var supportedTypes []string = []string{ecdsaStr, rsaStr, dsaStr, ed25519Str}
+var supportedTypes []string = []string{ecdsaStr, rsaStr, ed25519Str}
 
 func isSupportedGenkeyType(t string) bool {
 	t = strings.ToUpper(t)
