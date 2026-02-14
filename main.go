@@ -1,10 +1,22 @@
-/*
-Copyright © 2024 NAME HERE <EMAIL ADDRESS>
-*/
 package main
 
-import "github.com/crytoken/crypto-cli/cmd"
+import (
+	"fmt"
+	"os"
+	"os/signal"
+	"syscall"
+
+	"github.com/crytoken/crypto-cli/cmd"
+)
 
 func main() {
+
+	go func() {
+		sigCh := make(chan os.Signal, 1)
+		signal.Notify(sigCh, syscall.SIGINT, syscall.SIGTERM)
+		<-sigCh
+		fmt.Println("\nInterrupted.")
+		os.Exit(0)
+	}()
 	cmd.Execute()
 }
